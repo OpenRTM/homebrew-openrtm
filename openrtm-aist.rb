@@ -8,6 +8,12 @@ class OpenrtmAist < Formula
   depends_on "omniorb"
   depends_on "boost"
 
+  bottle do
+    root_url "https://github.com/OpenRTM/OpenRTM-aist/releases/download/v1.2.2/"
+    cellar :any
+    sha256 "1cd49e108c9b5df15779f3f9283bca5ea394c2d57e87a35562b5b03b557e8818" => :catalina
+  end
+
   def install
     args = %W[
       OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
