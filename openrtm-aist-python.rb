@@ -14,7 +14,7 @@ class OpenrtmAistPython < Formula
 
   def install
     system "/usr/local/bin/python3", "setup.py", "build"
-    system "/usr/local/bin/python3", "setup.py", "install"
+    system "/usr/local/bin/python3", "setup.py", "install", "--prefix=#{prefix}"
   end
 
   test do
