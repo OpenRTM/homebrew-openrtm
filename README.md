@@ -1,3 +1,5 @@
+![680px-Homebrew_logo svg](https://user-images.githubusercontent.com/11814060/94977441-b0b4de80-0553-11eb-91e4-0f671a2d4b41.png)
+
 # homebrew-tap
 Homebrew tap repository including OpenRTM-aist-* and related formula
 
