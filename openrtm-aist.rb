@@ -17,7 +17,7 @@ class OpenrtmAist < Formula
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
     cellar :any
-    sha256 "42acca3483c934b6adee2f598d0a42cf52dc7af7f1436fc99eed2ccdc934d4d3" => :catalina
+    sha256 "e35949fe8ae1c456b0d6faa04700895c3d4029e452eab0c08964bda74af0eb90" => :catalina
   end
 
   def install
