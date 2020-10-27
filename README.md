@@ -35,5 +35,17 @@ $ brew link openrtm-aist-python
 $ brew update
 $ brew tap openrtm/openrtm
 $ brew cask install openrtp
+$ open -a OpenRTP
 ```
+or launch OpenRTP from "Applications".
+
+When opening OpenRTP, the following dialog window might appear.
+In that case, please click the "Open" button.
+
+![Screen Shot 2020-10-27 at 15 59 16](https://user-images.githubusercontent.com/11814060/97267621-ca54f780-186d-11eb-9d88-6a41258286fd.png)
+
+If the "Open" button does not exist, please open the "System Preferences" and go to the "Security and Privacy", "General" submenu.
+Here please click the "Allow" button to give the privilege to execute the target application.
+
+
 
