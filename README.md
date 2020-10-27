@@ -30,3 +30,10 @@ $ brew install openrtm/openrtm-aist-python
 $ brew link openrtm-aist-python
 ```
 
+### OpenRTP-aist (Eclipse tool)
+```shell
+$ brew update
+$ brew tap openrtm/openrtm
+$ brew cask install openrtp
+```
+
