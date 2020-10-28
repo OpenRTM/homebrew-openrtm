@@ -8,6 +8,7 @@ Currently the following versions of OpenRTM-aist are provided.
 - OpenRTM-aist-1.2.2
   - C++ version
   - Python version
+  - Java version
   - OpenRTP
 
 ## How to install
