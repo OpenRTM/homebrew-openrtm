@@ -27,7 +27,10 @@ class OpenrtmAistJava < Formula
 
       # installing profile.d script into etc 
       system "mkdir", "-p", "#{prefix}/etc/profile.d"
-      system "echo", "export RTM_JAVA_ROOT=#{prefix}/openrtm-#{short_ver} > #{prefix}/etc/profile.d/openrtm-aist-java.sh"
+      File.open("#{prefix}/etc/profile.d/openrtm-aist-java.sh", mode = "w")
+      { |f|
+        f.write("export RTM_JAVA_ROOT=#{prefix}/openrtm-#{short_ver}")
+      }
       system "chmod", "755", "#{prefix}/etc/profile.d/openrtm-aist-java.sh"
 
       # installing executable into bin
