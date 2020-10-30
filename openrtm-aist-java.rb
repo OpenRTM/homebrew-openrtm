@@ -13,7 +13,7 @@ class OpenrtmAistJava < Formula
     short_ver = "1.2"
     # ENV.deparallelize  # if your formula fails when building in parallel
     # Remove unrecognized options if warned by configure
-    Dir.chdir("jp.go.aist.rtm.RTC/jar/source/OpenRTM-aist-Java-1.2.2-jar/OpenRTM-aist/1.2" do
+    Dir.chdir("jp.go.aist.rtm.RTC/jar/source/OpenRTM-aist-Java-1.2.2-jar/OpenRTM-aist/1.2") do
       system "mkdir", "-p", "#{prefix}/share/openrtm-#{shhort_ver}/doc/java"
       system "mkdir", "-p", "#{prefix}/share/openrtm-#{short_ver}/doc/java"
       system "cp", "-R", "JavaDoc",
