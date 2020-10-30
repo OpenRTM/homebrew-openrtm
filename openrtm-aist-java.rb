@@ -1,6 +1,8 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
+require 'fileutils'
+
 class OpenrtmAistJava < Formula
   desc "OpenRTM-aist: RT-Middleware and OMG RTC implementation in C++ implemented by AIST"
   homepage "https://openrtm.org"
@@ -42,21 +44,21 @@ class OpenrtmAistJava < Formula
       # installing examples
       system "mkdir", "-p",
              "#{prefix}/share/openrtm-#{short_ver}/components/java"
-      system "cp", "-R", "examples/*",
-             "#{prefix}/share/openrtm-#{short_ver}/components/java"
-      system "rm", "-f",
-             "#{prefix}/share/openrtm-#{short_ver}/components/java/*.bat"
-      system "rm", "-f",
-             "#{prefix}/share/openrtm-#{short_ver}/components/java/*.vbs"
-      system "rm", "-f",
-             "#{prefix}/share/openrtm-#{short_ver}/components/java/rtcd_java"
-      system "rm", "-f",
-             "#{prefix}/share/openrtm-#{short_ver}/components/java/rtcd_java.sh"
-      system "rm", "-f",
-             "#{prefix}/share/openrtm-#{short_ver}/components/java/rtcprof_java*"
-      system "chmod", "755",
-             "#{prefix}/share/openrtm-#{short_ver}/components/java/*.sh"
-    
+      Dir.chdir("examples") do
+        FileUtils.cp_r("examples/RTMExamples",
+                       "#{prefix}/share/openrtm-#{short_ver}/components/java/")
+        Dir.glob('*.sh').each do |fname|
+          FileUtils.cp(fname,
+            "#{prefix}/share/openrtm-#{short_ver}/components/java/" + fname)
+          system "chmod", "755",
+            "#{prefix}/share/openrtm-#{short_ver}/components/java/" + fname
+        end
+        flist = ["original-data", "rtcd_java.conf", "search_classpath.func"]
+        flist.each do |fname|
+          FileUtils.cp(fname,
+              "#{prefix}/share/openrtm-#{short_ver}/components/java/" + fname)
+        end
+      end # popdir from examples
     end # popdir from jp.go.....OpenRTM-aist/1.2
   end
 
