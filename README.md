@@ -38,7 +38,7 @@ $ python3 /usr/local/share/openrtm-1.2/components/python3/SimpleIO/ConsoleIn.py
 $ brew update
 $ brew tap openrtm/omniorb
 $ brew install openrtm/openrtm-aist-java
-$ cat /usr/local/etc/profile.d >> ~/.profile
+$ cat /usr/local/etc/profile.d/openrtm-aist-java.sh >> ~/.profile
 $ source ~/.profile
 $ /usr/local/share/openrtm-1.2/components/java/ConsoleIn.sh
 ```
