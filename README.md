@@ -20,6 +20,7 @@ $ brew tap openrtm/omniorb
 $ brew tap openrtm/openrtm
 $ brew install openrtm/openrtm-aist
 $ brew link openrtm-aist
+$ /usr/local/share/openrtm-1.2/components/c++/examples/ConsoleInComp
 ```
 
 ### OpenRTM-aist (Python)
@@ -29,6 +30,17 @@ $ brew tap openrtm/omniorb
 $ brew tap openrtm/openrtm
 $ brew install openrtm/openrtm-aist-python
 $ brew link openrtm-aist-python
+$ python3 /usr/local/share/openrtm-1.2/components/python3/SimpleIO/ConsoleIn.py 
+```
+
+### OpenRTM-aist (Java)
+```shell
+$ brew update
+$ brew tap openrtm/omniorb
+$ brew install openrtm/openrtm-aist-java
+$ cat /usr/local/etc/profile.d >> ~/.profile
+$ source ~/.profile
+$ /usr/local/share/openrtm-1.2/components/java/ConsoleIn.sh
 ```
 
 ### OpenRTP-aist (Eclipse tool)
