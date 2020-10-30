@@ -1,3 +1,9 @@
+#============================================================
+# OpenRTP-aist cask for HomeBrew
+#
+# Author: Noriaki Ando <Noriaki.Ando@gmail.com>
+# GitHub: https://github.com/OpenRTM/homebrew-openrtm
+#============================================================
 cask "openrtp" do
   version "1.2.2"
   sha256 "2d67b131dfcbb1a510e840bdb4641d576789c4f0a1ab22a351fd9ab45bec9352"
