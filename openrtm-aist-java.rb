@@ -1,6 +1,9 @@
-# Documentation: https://docs.brew.sh/Formula-Cookbook
-#                https://rubydoc.brew.sh/Formula
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
+#============================================================
+# OpenRTM-aist-Java formula for HomeBrew
+#
+# Author: Noriaki Ando <Noriaki.Ando@gmail.com>
+# GitHub: https://github.com/OpenRTM/homebrew-openrtm
+#============================================================
 require 'fileutils'
 
 class OpenrtmAistJava < Formula
