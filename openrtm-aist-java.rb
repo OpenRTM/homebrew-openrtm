@@ -11,6 +11,12 @@ class OpenrtmAistJava < Formula
   sha256 "f6cb64e746d5c1cdf894c6fa9e3b3904841fd115d0eea31da3220fc871874b5e"
   license "LGPL-2.1"
 
+  bottle do
+    root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
+    cellar :any_skip_relocation
+    sha256 "4477710635162c2f0859c138b8bac6a473c6fad832968ed6305af79b053cac05" => :catalina
+  end
+
   def install
     short_ver = "1.2"
     # ENV.deparallelize  # if your formula fails when building in parallel
@@ -30,7 +36,7 @@ class OpenrtmAistJava < Formula
       # installing profile.d script into etc 
       system "mkdir", "-p", "#{prefix}/etc/profile.d"
       File.open("#{prefix}/etc/profile.d/openrtm-aist-java.sh", mode = "w"){|f|
-        f.write("export RTM_JAVA_ROOT=#{prefix}/openrtm-#{short_ver}")
+        f.write("export RTM_JAVA_ROOT=#{prefix}/lib/openrtm-#{short_ver}")
       }
       system "chmod", "755", "#{prefix}/etc/profile.d/openrtm-aist-java.sh"
 
@@ -45,7 +51,7 @@ class OpenrtmAistJava < Formula
       system "mkdir", "-p",
              "#{prefix}/share/openrtm-#{short_ver}/components/java"
       Dir.chdir("examples") do
-        FileUtils.cp_r("examples/RTMExamples",
+        FileUtils.cp_r("RTMExamples",
                        "#{prefix}/share/openrtm-#{short_ver}/components/java/")
         Dir.glob('*.sh').each do |fname|
           FileUtils.cp(fname,
