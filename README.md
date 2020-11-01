@@ -9,7 +9,7 @@ Currently the following versions of OpenRTM-aist are provided.
   - C++ version
   - Python version
   - Java version
-  - OpenRTP
+  - OpenRTP (RTCBuildler, RTSystemEditor on Eclipse)
 
 ## How to install
 
@@ -20,6 +20,7 @@ $ brew tap openrtm/omniorb
 $ brew tap openrtm/openrtm
 $ brew install openrtm/openrtm-aist
 $ brew link openrtm-aist
+and then please try to run sample components 
 $ /usr/local/share/openrtm-1.2/components/c++/examples/ConsoleInComp
 ```
 
@@ -30,6 +31,7 @@ $ brew tap openrtm/omniorb
 $ brew tap openrtm/openrtm
 $ brew install openrtm/openrtm-aist-python
 $ brew link openrtm-aist-python
+and then please try to run sample components
 $ python3 /usr/local/share/openrtm-1.2/components/python3/SimpleIO/ConsoleIn.py 
 ```
 
@@ -40,6 +42,7 @@ $ brew tap openrtm/omniorb
 $ brew install openrtm/openrtm-aist-java
 $ cat /usr/local/etc/profile.d/openrtm-aist-java.sh >> ~/.profile
 $ source ~/.profile
+and then please try to run sample components
 $ /usr/local/share/openrtm-1.2/components/java/ConsoleIn.sh
 ```
 
