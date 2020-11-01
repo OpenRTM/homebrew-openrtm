@@ -9,7 +9,7 @@ Currently the following versions of OpenRTM-aist are provided.
   - C++ version
   - Python version
   - Java version
-  - OpenRTP (RTCBuildler, RTSystemEditor on Eclipse)
+  - OpenRTP-aist (RTCBuildler, RTSystemEditor on Eclipse)
 
 ## How to install
 
