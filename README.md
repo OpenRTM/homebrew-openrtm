@@ -14,6 +14,8 @@ Currently the following versions of OpenRTM-aist are provided.
 ## How to install
 
 ### OpenRTM-aist (C++)
+
+Please install the omniORB bottle "[omniorb-ssl](https://github.com/OpenRTM/homebrew-omniorb)" provided us.
 ```shell
 $ brew update
 $ brew tap openrtm/omniorb
@@ -25,6 +27,7 @@ $ /usr/local/share/openrtm-1.2/components/c++/examples/ConsoleInComp
 ```
 
 ### OpenRTM-aist (Python)
+Please install the omniORBpy bottle "[omniorb-python3](https://github.com/OpenRTM/homebrew-omniorb)" provided us instead of official "omniorb" bottle.
 ```shell
 $ brew update
 $ brew tap openrtm/omniorb
