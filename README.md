@@ -27,7 +27,7 @@ $ /usr/local/share/openrtm-1.2/components/c++/examples/ConsoleInComp
 ```
 
 ### OpenRTM-aist (Python)
-Please install the omniORBpy bottle "[omniorb-python3](https://github.com/OpenRTM/homebrew-omniorb)" provided us instead of official "omniorb" bottle.
+Please install the omniORBpy bottle "[omniorbpy](https://github.com/OpenRTM/homebrew-omniorb)" provided us instead of official "omniorb" bottle.
 ```shell
 $ brew update
 $ brew tap openrtm/omniorb
