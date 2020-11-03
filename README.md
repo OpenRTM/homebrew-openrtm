@@ -39,8 +39,10 @@ $ python3 /usr/local/share/openrtm-1.2/components/python3/SimpleIO/ConsoleIn.py
 ```
 
 ### OpenRTM-aist (Java)
+Java8 is necesarry for OpenRTM-aist-Java and OpenRTP.
 ```shell
 $ brew update
+$ brew cask install adoptopenjdk8
 $ brew tap openrtm/omniorb
 $ brew install openrtm/openrtm-aist-java
 $ cat /usr/local/etc/profile.d/openrtm-aist-java.sh >> ~/.profile
@@ -50,8 +52,10 @@ $ /usr/local/share/openrtm-1.2/components/java/ConsoleIn.sh
 ```
 
 ### OpenRTP-aist (Eclipse tool)
+Java8 is necesarry for OpenRTM-aist-Java and OpenRTP.
 ```shell
 $ brew update
+$ brew cask install adoptopenjdk8
 $ brew tap openrtm/openrtm
 $ brew cask install openrtp
 $ open -a OpenRTP
