@@ -6,7 +6,7 @@
 #============================================================
 cask "openrtp" do
   version "1.2.2"
-  sha256 "b29d93c333f02322bb919be7eb77355644860dd6bb7ed4929d32b3e3a77253a9"
+  sha256 "d3596c0d3f3965360d74f6852f5db17b47d3614f837747f54c77a7b5b4099cf2"
   
   url "https://github.com/OpenRTM/OpenRTP-aist/releases/download/v1.2.2/openrtp_v1.2.2.dmg"
   name "OpenRTP-aist"
