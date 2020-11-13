@@ -43,7 +43,6 @@ Java8 is necesarry for OpenRTM-aist-Java and OpenRTP.
 ```shell
 $ brew update
 $ brew cask install adoptopenjdk8
-$ brew tap openrtm/omniorb
 $ brew install openrtm/openrtm-aist-java
 $ cat /usr/local/etc/profile.d/openrtm-aist-java.sh >> ~/.profile
 $ source ~/.profile
@@ -52,10 +51,10 @@ $ /usr/local/share/openrtm-1.2/components/java/ConsoleIn.sh
 ```
 
 ### OpenRTP-aist (Eclipse tool)
-Java8 is necesarry for OpenRTM-aist-Java and OpenRTP.
+Due to the OpenRTP dependency, the Cask of adoptopenjdk8 will be installed automatically.
+
 ```shell
 $ brew update
-$ brew cask install adoptopenjdk8
 $ brew tap openrtm/openrtm
 $ brew cask install openrtp
 $ open -a OpenRTP
