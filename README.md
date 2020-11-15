@@ -11,6 +11,12 @@ Currently the following versions of OpenRTM-aist are provided.
   - Java version
   - OpenRTP-aist (RTCBuildler, RTSystemEditor on Eclipse)
 
+These packages supports the following macOS versions
+
+- Catalina
+
+Currently, OpenRTM-aist (C++, Java, Python) partially supports the "macOS Big Sur", but OpenRTP does not work on the Big Sur. 
+
 ## How to install
 
 ### OpenRTM-aist (C++)
