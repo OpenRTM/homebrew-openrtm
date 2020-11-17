@@ -11,7 +11,7 @@ class OpenrtmAist < Formula
   sha256 "4e25b0e38d9b6690b94e1163285ea8b49aef6b245a2c454586915d425e5830a0"
   license "LGPL-2.1"
 
-  depends_on "openrtm/openrtm/omniorb-ssl"
+  depends_on "openrtm/omniorb/omniorb-ssl"
   depends_on "boost"
 
   bottle do
