@@ -24,9 +24,8 @@ Currently, OpenRTM-aist (C++, Java, Python) partially supports the "macOS Big Su
 Please install the omniORB bottle "[omniorb-ssl](https://github.com/OpenRTM/homebrew-omniorb)" provided us instead of official "omniorb" bottle.
 ```shell
 $ brew update
-$ brew tap openrtm/omniorb
-$ brew tap openrtm/openrtm
-$ brew install openrtm/openrtm-aist
+$ brew uninstall omniorb <= if you already installed omniorb
+$ brew install openrtm/openrtm/openrtm-aist
 $ brew link openrtm-aist
 and then please try to run sample components 
 $ /usr/local/share/openrtm-1.2/components/c++/examples/ConsoleInComp
@@ -36,8 +35,6 @@ $ /usr/local/share/openrtm-1.2/components/c++/examples/ConsoleInComp
 Please install the omniORBpy bottle "[omniorbpy](https://github.com/OpenRTM/homebrew-omniorb)" provided us.
 ```shell
 $ brew update
-$ brew tap openrtm/omniorb
-$ brew tap openrtm/openrtm
 $ brew install openrtm/openrtm-aist-python
 $ brew link openrtm-aist-python
 and then please try to run sample components
@@ -49,7 +46,7 @@ Java8 is necesarry for OpenRTM-aist-Java and OpenRTP.
 ```shell
 $ brew update
 $ brew cask install adoptopenjdk8
-$ brew install openrtm/openrtm-aist-java
+$ brew install openrtm/openrtm/openrtm-aist-java
 $ cat /usr/local/etc/profile.d/openrtm-aist-java.sh >> ~/.profile
 $ source ~/.profile
 and then please try to run sample components
