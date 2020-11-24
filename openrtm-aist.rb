@@ -21,7 +21,7 @@ class OpenrtmAist < Formula
   end
 
   patch do
-    url "https://github.com/OpenRTM/homebrew-openrtm/raw/master/Patches/rtm-naming.diff"
+    url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
     sha256 "3a89f3ad048ab0693de8ae9fd3d1b8502b5b57f612926322de769eb6aebdb8df"
   end
 
