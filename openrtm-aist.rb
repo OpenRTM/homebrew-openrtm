@@ -20,6 +20,11 @@ class OpenrtmAist < Formula
     sha256 "e35949fe8ae1c456b0d6faa04700895c3d4029e452eab0c08964bda74af0eb90" => :catalina
   end
 
+  patch do
+    url "https://github.com/OpenRTM/homebrew-openrtm/raw/master/Patches/rtm-naming.diff"
+    sha256 "3a89f3ad048ab0693de8ae9fd3d1b8502b5b57f612926322de769eb6aebdb8df"
+  end
+
   def install
     args = %W[
       OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include

@@ -1,23 +1,24 @@
-diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
---- openrtm-aist/1.2.2/bin/rtm-naming	2020-11-25 01:12:36.000000000 +0900
-+++ openrtm-aist.new/1.2.2/bin/rtm-naming	2020-11-25 00:20:43.000000000 +0900
-@@ -17,10 +17,11 @@
+diff --git a/utils/rtm-naming/rtm-naming.in b/utils/rtm-naming/rtm-naming.in
+old mode 100644
+new mode 100755
+index d9c586a8..837b2c8c
+--- a/utils/rtm-naming/rtm-naming.in
++++ b/utils/rtm-naming/rtm-naming.in
+@@ -13,9 +13,10 @@
  #  $Id$
  #
  
 -pname=`basename $cosnames`
 -hostname=`hostname`
 -currdir=`pwd`
--DEBUG=""
 +PNAME=`basename $cosnames`
 +HOSTNAME=`hostname`
 +OSNAME=`uname -s`
 +LOGDIR="/tmp"
-+DEBUG="TRUE"
+ DEBUG=""
  
  usage()
- {
-@@ -45,6 +46,7 @@
+@@ -41,6 +42,7 @@ EOF
  
  get_opt()
  {
@@ -25,7 +26,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      # Global variables
      FORCEKILL=""
      PASSWORD=""
-@@ -69,6 +71,11 @@
+@@ -65,6 +67,11 @@ get_opt()
                  ;;
          esac
      done
@@ -37,7 +38,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
  }
  #
  # debug <text>
-@@ -80,7 +87,7 @@
+@@ -76,7 +83,7 @@ get_opt()
  debug()
  {
      if test "x$DEBUG" != "x"; then
@@ -46,7 +47,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      fi
  }
  
-@@ -93,9 +100,15 @@
+@@ -89,9 +96,15 @@ debug()
  # @return 0 process that is using the port was found
  #         1 process not found
  #
@@ -62,7 +63,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      _port=$1
      debug "netstat -tlnp 2> /dev/null | grep $_port | awk '{print $7;}'"
      netstat_tanp=`netstat -tlnp`
-@@ -117,7 +130,43 @@
+@@ -113,7 +126,43 @@ get_pid_of_nsport()
      debug "$_port port is used by $pname_of_nsport (pid = $_pid)."
      return 0
  }
@@ -106,7 +107,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
  
  #
  # is_launch_from_init <prog_name> (<pid>)
-@@ -180,6 +229,7 @@
+@@ -176,6 +225,7 @@ is_started_from_init()
  #
  check_cosname()
  {
@@ -114,7 +115,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      if test ! -f $cosnames ; then
  	echo "Name service program ($cosnames) not found."
  	echo "Please install or chech rtm-naming script."
-@@ -189,16 +239,17 @@
+@@ -185,16 +235,17 @@ check_cosname()
  
  delete_omninames_files()
  {
@@ -139,7 +140,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
  }
  
  #
-@@ -208,12 +259,17 @@
+@@ -204,12 +255,17 @@ delete_omninames_files()
  #
  specified_port_used_check()
  {
@@ -159,7 +160,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
          matchflag=0
          for p in $pids; do
              if test "x$pid_of_nsport" = "x$p"; then
-@@ -221,8 +277,8 @@
+@@ -217,8 +273,8 @@ specified_port_used_check()
              fi
          done
          if test $matchflag -eq 0; then
@@ -170,7 +171,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
              exit 1
          fi
      else
-@@ -239,6 +295,7 @@
+@@ -235,6 +291,7 @@ specified_port_used_check()
  #
  stop_omninames_by_init_script()
  {
@@ -178,7 +179,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      echo "omniNames might be started $init_script."
  
      if test "x$FORCEKILL" = "x" && test "x$STOPNAMESERVICE" = "x" ; then
-@@ -252,13 +309,13 @@
+@@ -248,13 +305,13 @@ stop_omninames_by_init_script()
      echo "Stopping omniNames by $init_script."
      if test "x$PASSWORD" = "x" ; then
         sudo $init_script stop
@@ -195,7 +196,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      delete_omninames_files
      return 0
  
-@@ -282,7 +339,8 @@
+@@ -278,7 +335,8 @@ stop_omninames_by_init_script()
  #
  stop_existing_ns()
  {
@@ -205,7 +206,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
  
      # Find a process which is using specified port.
      specified_port_used_check
-@@ -292,14 +350,14 @@
+@@ -288,14 +346,14 @@ stop_existing_ns()
  
      # omniNames is not started by init script
      if test $? -ne 0; then
@@ -223,7 +224,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
  	            else
                      read -p "Kill anyway? (y/N)" killns
  		        fi
-@@ -313,12 +371,12 @@
+@@ -309,12 +367,12 @@ stop_existing_ns()
              else
                  echo $PASSWORD | sudo -S kill -9 $pid_of_nsport
              fi
@@ -239,7 +240,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
          echo "cannot be estimated. Arboting"
          exit 1
      fi
-@@ -338,20 +396,40 @@
+@@ -334,20 +392,40 @@ stop_existing_ns()
  #
  start_omninames()
  {
@@ -279,7 +280,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
 -    omnip=`ps $! | wc -l`
 -    if test $omnip -gt 1; then
 -        echo "omniNames properly started"
-+    
++
 +    # check if the omniNames strill working
 +    omnipid=`ps $pid | grep $pid | grep -v grep | awk '{print $1;}'`
 +    debug   "omnipid: "$omnipid
@@ -289,7 +290,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
          exit 0
      fi
      return 1 
-@@ -359,6 +437,7 @@
+@@ -355,6 +433,7 @@ start_omninames()
  
  omniname()
  {
@@ -297,7 +298,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      # Check cosname variable is properly set
      check_cosname
  
-@@ -389,11 +468,12 @@
+@@ -385,11 +464,12 @@ omniname()
  #
  start_taonames()
  {
@@ -311,7 +312,7 @@ diff -ur openrtm-aist/1.2.2/bin/rtm-naming openrtm-aist.new/1.2.2/bin/rtm-naming
      $cosnames -m 0 -ORBListenEndpoints iiop://:$PORT &
      ret=$!
      sleep 1
-@@ -409,6 +489,7 @@
+@@ -405,6 +485,7 @@ start_taonames()
  
  taonames()
  {
