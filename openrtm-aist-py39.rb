@@ -4,7 +4,7 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-openrtm
 #============================================================
-class OpenrtmAist < Formula
+class OpenrtmAistPy39 < Formula
   desc "OpenRTM-aist: RT-Middleware and OMG RTC implementation in C++ implemented by AIST"
   homepage "https://openrtm.org"
   url "https://github.com/OpenRTM/OpenRTM-aist/releases/download/v1.2.2/OpenRTM-aist-1.2.2.tar.gz"
@@ -17,10 +17,9 @@ class OpenrtmAist < Formula
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
     cellar :any
-    rebuild 1
-    sha256 "6dc9945f6066e792f29b72cb97e74e3a5d2f5fa895cd938eb3cdf93b5db96866" => :catalina
+    sha256 "eb9f1bba9b4c929e377a30f2e4359df33b628d078e550769e481c135d6748f48" => :catalina
   end
-
+  
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
     sha256 "3a89f3ad048ab0693de8ae9fd3d1b8502b5b57f612926322de769eb6aebdb8df"
