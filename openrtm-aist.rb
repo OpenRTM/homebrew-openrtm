@@ -20,6 +20,12 @@ class OpenrtmAist < Formula
     rebuild 1
     sha256 "6dc9945f6066e792f29b72cb97e74e3a5d2f5fa895cd938eb3cdf93b5db96866" => :catalina
   end
+  bottle do
+    root_url "https://homebrew.bintray.com/bottles-openrtm"
+    cellar :any
+    rebuild 2
+    sha256 "040affa6c93010bcdfa7308936bd0be7dea0fcac5074fa350d23c6a16199be40" => :catalina
+  end
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"

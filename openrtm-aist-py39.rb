@@ -22,7 +22,7 @@ class OpenrtmAistPy39 < Formula
   
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
-    sha256 "3a89f3ad048ab0693de8ae9fd3d1b8502b5b57f612926322de769eb6aebdb8df"
+    sha256 "a41cbb5d166728ac666860e6354f7269b92c04b58c4235141080b2020be3aaca"
   end
 
   def install
@@ -37,7 +37,7 @@ class OpenrtmAistPy39 < Formula
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
-    system "make"
+    system "make", "-j", "8"
     system "make", "install"
   end
 
