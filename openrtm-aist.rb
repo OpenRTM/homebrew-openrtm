@@ -15,7 +15,7 @@ class OpenrtmAist < Formula
   depends_on "boost"
 
   bottle do
-    root_url "https://homebrew.bintray.com/bottles-openrtm"
+    root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2"
     cellar :any
     rebuild 2
     sha256 "040affa6c93010bcdfa7308936bd0be7dea0fcac5074fa350d23c6a16199be40" => :catalina

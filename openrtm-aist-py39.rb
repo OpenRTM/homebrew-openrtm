@@ -11,14 +11,14 @@ class OpenrtmAistPy39 < Formula
   sha256 "4e25b0e38d9b6690b94e1163285ea8b49aef6b245a2c454586915d425e5830a0"
   license "LGPL-2.1"
 
-  depends_on "openrtm/omniorb/omniorb-ssl"
+  depends_on "openrtm/omniorb/omniorb-ssl-py39"
   depends_on "boost"
 
   bottle do
-    root_url "https://homebrew.bintray.com/bottles-openrtm"
+    root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2"
     cellar :any
-    rebuild 1
-    sha256 "f973ee952d7a8d78ec6cd99e7a237b1d729236afd3c4afc5061df4c7b1201559" => :catalina
+    rebuild 2
+    sha256 "ff8f14c6a69f5fb29284cd2e6ab47198561ba681d76912c037a95dc70c523589" => :catalina
   end
 
   patch do
@@ -30,6 +30,8 @@ class OpenrtmAistPy39 < Formula
     args = %W[
       OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
       OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
+      CFLAGS=-I/usr/local/opt/python@3.9/include
+      LDFLAGS=-L/usr/local/opt/python@3.9/lib
       CC=gcc-4.9
       CXX=g++-4.9
     ]

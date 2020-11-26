@@ -24,6 +24,19 @@ class OpenrtmAistPy38 < Formula
     cellar :any
     sha256 "1bf6d956dd58787a282201e841428041e8467ac2fdc4cf1fdced72a57523dc74" => :catalina
   end
+  
+  bottle do
+    root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2"
+    cellar :any
+    rebuild 1
+    sha256 "7e751f843aa18db7edcab1574e1379fa6b88332294763842c42a2d0303b9dba7" => :catalina
+  end
+
+
+  patch do
+    url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
+    sha256 "a41cbb5d166728ac666860e6354f7269b92c04b58c4235141080b2020be3aaca"
+  end
 
   def install
     args = %W[
@@ -39,7 +52,7 @@ class OpenrtmAistPy38 < Formula
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
-    system "make", "-j", "4"
+    system "make", "-j", "8"
     system "make", "install"
   end
 
