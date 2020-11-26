@@ -23,7 +23,7 @@ class OpenrtmAist < Formula
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
-    sha256 "3a89f3ad048ab0693de8ae9fd3d1b8502b5b57f612926322de769eb6aebdb8df"
+    sha256 "ba0767c0471cab09edee623323620f02a37dfe27d6a28b01b2a5e6884cf05bce"
   end
 
   def install

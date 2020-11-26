@@ -1,23 +1,41 @@
+diff --git a/utils/rtm-naming/Makefile.am b/utils/rtm-naming/Makefile.am
+index a9e7bb5e..151a2ed6 100644
+--- a/utils/rtm-naming/Makefile.am
++++ b/utils/rtm-naming/Makefile.am
+@@ -13,10 +13,10 @@ ORB = @ORB@
+ bin_SCRIPTS = rtm-naming
+ 
+ rtm-naming: rtm-naming.in
+-	echo '#!/bin/sh' > $@
++	echo '#!/bin/bash' > $@
+ 	echo '' >> $@
+-	echo 'cosnames="'${COSNAMES}'"' >> $@
+-	echo 'orb="'${ORB}'"' >> $@
++	echo 'COSNAMES="'${COSNAMES}'"' >> $@
++	echo 'ORB="'${ORB}'"' >> $@
+ 	cat rtm-naming.in >> $@
+ 	chmod 755 $@
+ 
 diff --git a/utils/rtm-naming/rtm-naming.in b/utils/rtm-naming/rtm-naming.in
-old mode 100644
-new mode 100755
-index d9c586a8..837b2c8c
+index d9c586a8..794c8350 100644
 --- a/utils/rtm-naming/rtm-naming.in
 +++ b/utils/rtm-naming/rtm-naming.in
-@@ -13,9 +13,10 @@
+@@ -13,10 +13,11 @@
  #  $Id$
  #
  
 -pname=`basename $cosnames`
 -hostname=`hostname`
 -currdir=`pwd`
-+PNAME=`basename $cosnames`
+-DEBUG=""
++PNAME=`basename $COSNAMES`
 +HOSTNAME=`hostname`
 +OSNAME=`uname -s`
 +LOGDIR="/tmp"
- DEBUG=""
++DEBUG="YES"
  
  usage()
+ {
 @@ -41,6 +42,7 @@ EOF
  
  get_opt()
@@ -43,7 +61,7 @@ index d9c586a8..837b2c8c
  {
      if test "x$DEBUG" != "x"; then
 -        echo $*
-+        echo $* >> /tmp/rtm-naming_debug.log
++        echo $* >> /tmp/rtm-naming-${USER}_debug.log
      fi
  }
  
@@ -85,7 +103,7 @@ index d9c586a8..837b2c8c
 +{
 +    debug "get_pid_of_nsport_macos()"
 +    _port=$1
-+    debug "lsof -n -P -i :$_port | grep LISTEN"
++    debug "sudo -S lsof -n -P -i :$_port | grep LISTEN"
 +    if test "x$PASSWORD" = "x"; then
 +        _netstat=`sudo -S lsof -n -P -i :$_port | grep LISTEN`
 +    else
@@ -107,45 +125,74 @@ index d9c586a8..837b2c8c
  
  #
  # is_launch_from_init <prog_name> (<pid>)
-@@ -176,6 +225,7 @@ is_started_from_init()
+@@ -148,8 +197,8 @@ is_started_from_init()
+ 	if test $_pid -eq $_var_run_pid; then
+ 	    debug "The process $_pname ($_pid) might be started " \
+ 		"from init script."
+-	    debug "searching init script: $cosnames"
+-	    init_script=`grep $cosnames /etc/init.d/* | awk 'BEGIN{FS=":";}{if(FNR==1){print $1;}}'`
++	    debug "searching init script: $COSNAMES"
++	    init_script=`grep $COSNAMES /etc/init.d/* | awk 'BEGIN{FS=":";}{if(FNR==1){print $1;}}'`
+ 
+ 	    if test "x$init_script" = "x"; then
+ 
+@@ -176,8 +225,9 @@ is_started_from_init()
  #
  check_cosname()
  {
+-    if test ! -f $cosnames ; then
+-	echo "Name service program ($cosnames) not found."
 +    debug "check_cosname()"
-     if test ! -f $cosnames ; then
- 	echo "Name service program ($cosnames) not found."
++    if test ! -f $COSNAMES ; then
++	echo "Name service program ($COSNAMES) not found."
  	echo "Please install or chech rtm-naming script."
-@@ -185,16 +235,17 @@ check_cosname()
+ 	exit 1
+     fi
+@@ -185,16 +235,31 @@ check_cosname()
  
  delete_omninames_files()
  {
 +    debug "delete_omninames_files()"
++    _logfiles=(
++        $LOGDIR/omninames-$HOSTNAME.log
++        $LOGDIR/omninames-$HOSTNAME.bak
++        $LOGDIR/omninames-$HOSTNAME.dat
++        )
      if test "x$PASSWORD" = "x" ; then
 -        rm -f ./omninames-$hostname.log
 -        rm -f ./omninames-$hostname.bak
 -        rm -f ./omninames-$hostname.dat
-+        rm -f $LOGDIR/omninames-$HOSTNAME.log
-+        rm -f $LOGDIR/omninames-$HOSTNAME.bak
-+        rm -f $LOGDIR/omninames-$HOSTNAME.dat
++        for file in ${_logfiles[@]} ; do
++            if test -w $file ; then
++                rm -f $file
++            else
++                debug "log files are not writable. delete by sudo."
++                sudo -S rm -f $file
++            fi
++        done
      else
 -        echo $PASSWORD | sudo -S rm -f ./omninames-$hostname.log
 -        echo $PASSWORD | sudo -S rm -f ./omninames-$hostname.bak
 -        echo $PASSWORD | sudo -S rm -f ./omninames-$hostname.dat
-+        echo $PASSWORD | sudo -S rm -f $LOGDIR/omninames-$HOSTNAME.log
-+        echo $PASSWORD | sudo -S rm -f $LOGDIR/omninames-$HOSTNAME.bak
-+        echo $PASSWORD | sudo -S rm -f $LOGDIR/omninames-$HOSTNAME.dat
++        for file in ${_logfiles[@]} ; do
++            echo $PASSWORD | sudo -S rm -f $file
++        done
++    fi
++    if test $? != 0 ; then
++        echo "Delete log files failed!!"
++        debug "Delete log files failed!!"
      fi
 -    debug "omninames-$hostname files deleted."
 +    debug "omninames-$HOSTNAME files deleted."
  }
  
  #
-@@ -204,12 +255,17 @@ delete_omninames_files()
+@@ -204,12 +269,17 @@ delete_omninames_files()
  #
  specified_port_used_check()
  {
 -    get_pid_of_nsport $PORT
-+    debug "pecified_port_used_check()"
++    debug "specified_port_used_check()"
 +    if test "x$OSNAME" = "xDarwin" ; then
 +        get_pid_of_nsport_macos $PORT
 +    else
@@ -160,7 +207,7 @@ index d9c586a8..837b2c8c
          matchflag=0
          for p in $pids; do
              if test "x$pid_of_nsport" = "x$p"; then
-@@ -217,8 +273,8 @@ specified_port_used_check()
+@@ -217,8 +287,8 @@ specified_port_used_check()
              fi
          done
          if test $matchflag -eq 0; then
@@ -171,7 +218,7 @@ index d9c586a8..837b2c8c
              exit 1
          fi
      else
-@@ -235,6 +291,7 @@ specified_port_used_check()
+@@ -235,6 +305,7 @@ specified_port_used_check()
  #
  stop_omninames_by_init_script()
  {
@@ -179,7 +226,7 @@ index d9c586a8..837b2c8c
      echo "omniNames might be started $init_script."
  
      if test "x$FORCEKILL" = "x" && test "x$STOPNAMESERVICE" = "x" ; then
-@@ -248,13 +305,13 @@ stop_omninames_by_init_script()
+@@ -248,13 +319,13 @@ stop_omninames_by_init_script()
      echo "Stopping omniNames by $init_script."
      if test "x$PASSWORD" = "x" ; then
         sudo $init_script stop
@@ -196,7 +243,7 @@ index d9c586a8..837b2c8c
      delete_omninames_files
      return 0
  
-@@ -278,7 +335,8 @@ stop_omninames_by_init_script()
+@@ -278,7 +349,8 @@ stop_omninames_by_init_script()
  #
  stop_existing_ns()
  {
@@ -206,7 +253,7 @@ index d9c586a8..837b2c8c
  
      # Find a process which is using specified port.
      specified_port_used_check
-@@ -288,14 +346,14 @@ stop_existing_ns()
+@@ -288,14 +360,14 @@ stop_existing_ns()
  
      # omniNames is not started by init script
      if test $? -ne 0; then
@@ -224,14 +271,20 @@ index d9c586a8..837b2c8c
  	            else
                      read -p "Kill anyway? (y/N)" killns
  		        fi
-@@ -309,12 +367,12 @@ stop_existing_ns()
+@@ -305,16 +377,18 @@ stop_existing_ns()
+                 fi
+ 	        fi
+             if test "x$PASSWORD" = "x" ; then
++                debug "Killing name service. PID = " $pid_of_nsport
+                 sudo kill -9 $pid_of_nsport
              else
++                debug "Killing name service. PID = " $pid_of_nsport
                  echo $PASSWORD | sudo -S kill -9 $pid_of_nsport
              fi
 -            echo "$pname (pid: $pid_of_nsport) are killed"
 -            debug "$pname (pid: $pid_of_nsport) are killed"
-+            echo "$PNAME (pid: $pid_of_nsport) are killed"
-+            debug "$PNAME (pid: $pid_of_nsport) are killed"
++            echo "$PNAME (pid: $pid_of_nsport) is killed"
++            debug "$PNAME (pid: $pid_of_nsport) is killed"
              delete_omninames_files
              return 0
          fi
@@ -240,7 +293,7 @@ index d9c586a8..837b2c8c
          echo "cannot be estimated. Arboting"
          exit 1
      fi
-@@ -334,20 +392,40 @@ stop_existing_ns()
+@@ -334,34 +408,54 @@ stop_existing_ns()
  #
  start_omninames()
  {
@@ -251,22 +304,19 @@ index d9c586a8..837b2c8c
 +    echo  'Starting omniORB omniNames: '$HOSTNAME':'$PORT
 +    debug 'Starting omniORB omniNames: '$HOSTNAME':'$PORT
      delete_omninames_files
-     if test "x$PASSWORD" = "x" ; then
+-    if test "x$PASSWORD" = "x" ; then
 -        $cosnames -start $PORT -logdir $currdir &
-+        debug "$cosnames -start $PORT -logdir $LOGDIR"
-+        $cosnames -start $PORT -logdir $LOGDIR &
-     else
--        echo $PASSWORD | sudo -S $cosnames -start $PORT -logdir $currdir &
-+        debug "echo $PASSWORD | sudo -S $cosnames -start $PORT -logdir $LOGDIR"
-+        echo $PASSWORD | sudo -S $cosnames -start $PORT -logdir $LOGDIR &
-     fi
--    ret=$!
++
++    debug "$COSNAMES -start $PORT -logdir $LOGDIR"
++    $COSNAMES -start $PORT -logdir $LOGDIR &
 +    if test $? != 0; then
 +        debug "omniNames start failed."
 +        return 1
-+    else
+     else
+-        echo $PASSWORD | sudo -S $cosnames -start $PORT -logdir $currdir &
 +        debug "omniNames started."
-+    fi
+     fi
+-    ret=$!
 +
 +    pid=$!
 +    debug "PID: " $!
@@ -284,13 +334,16 @@ index d9c586a8..837b2c8c
 +    # check if the omniNames strill working
 +    omnipid=`ps $pid | grep $pid | grep -v grep | awk '{print $1;}'`
 +    debug   "omnipid: "$omnipid
-+    if test "x$omnipid" != "x" -a $omnipid -gt 1; then
++    if test "x$omnipid" != "x" ; then
 +        debug "omniNames properly started"
 +        echo  "omniNames properly started"
          exit 0
++    else
++        debug "omniNames start failed."
++        echo  "omniNames start failed."
      fi
      return 1 
-@@ -355,6 +433,7 @@ start_omninames()
+ }
  
  omniname()
  {
@@ -298,21 +351,44 @@ index d9c586a8..837b2c8c
      # Check cosname variable is properly set
      check_cosname
  
-@@ -385,11 +464,12 @@ omniname()
+     # Starting omniNames 
+     if test "x$STOPNAMESERVICE" = "x" ; then
+-      start_omninames
+-      echo "omniNames was not properly started."
++        start_omninames
++        echo "omniNames was not properly started."
+     fi
+ 
+     # Stopping existing name service
+@@ -369,8 +463,8 @@ omniname()
+ 
+     # Try to start omniNames again
+     if test "x$STOPNAMESERVICE" = "x" ; then
+-      start_omninames
+-      echo "omniNames was not properly started."
++        start_omninames
++        echo "omniNames was not properly started."
+     fi
+ }
+ 
+@@ -385,12 +479,13 @@ omniname()
  #
  start_taonames()
  {
+-    if test ! -f $cosnames ; then
 +    debug "start_taonames()"
-     if test ! -f $cosnames ; then
++    if test ! -f $COSNAMES ; then
  	echo "TAO Naming_Service not found. Aborting."
  	exit 1
      fi
 -    echo 'Starting TAO Naming_Service: '$hostname':'$PORT
+-    $cosnames -m 0 -ORBListenEndpoints iiop://:$PORT &
 +    echo 'Starting TAO Naming_Service: '$HOSTNAME':'$PORT
-     $cosnames -m 0 -ORBListenEndpoints iiop://:$PORT &
++    $COSNAMES -m 0 -ORBListenEndpoints iiop://:$PORT &
      ret=$!
      sleep 1
-@@ -405,6 +485,7 @@ start_taonames()
+     debug "return code of TAO Naming_Service:" $ret
+@@ -405,6 +500,7 @@ start_taonames()
  
  taonames()
  {
@@ -320,3 +396,12 @@ index d9c586a8..837b2c8c
      # Check cosname variable is properly set
      check_cosname
  
+@@ -427,7 +523,7 @@ taonames()
+ #------------------------------------------------------------
+ get_opt $@
+ 
+-case $orb in
++case $ORB in
+ 	omniORB)
+ 		omniname
+ 		;;
