@@ -1,9 +1,8 @@
-diff --git a/utils/rtm-naming/Makefile.am b/utils/rtm-naming/Makefile.am
-index a9e7bb5e..151a2ed6 100644
---- a/utils/rtm-naming/Makefile.am
-+++ b/utils/rtm-naming/Makefile.am
-@@ -13,10 +13,10 @@ ORB = @ORB@
- bin_SCRIPTS = rtm-naming
+diff -ru a/utils/rtm-naming/Makefile.in b/utils/rtm-naming/Makefile.in
+--- a/utils/rtm-naming/Makefile.in	2020-11-26 23:51:46.000000000 +0900
++++ b/utils/rtm-naming/Makefile.in	2020-11-26 23:56:22.000000000 +0900
+@@ -549,10 +549,10 @@
+ 
  
  rtm-naming: rtm-naming.in
 -	echo '#!/bin/sh' > $@
@@ -16,27 +15,37 @@ index a9e7bb5e..151a2ed6 100644
  	cat rtm-naming.in >> $@
  	chmod 755 $@
  
-diff --git a/utils/rtm-naming/rtm-naming.in b/utils/rtm-naming/rtm-naming.in
-index d9c586a8..794c8350 100644
---- a/utils/rtm-naming/rtm-naming.in
-+++ b/utils/rtm-naming/rtm-naming.in
-@@ -13,10 +13,11 @@
- #  $Id$
+diff -ru a/utils/rtm-naming/rtm-naming.in b/utils/rtm-naming/rtm-naming.in
+--- a/utils/rtm-naming/rtm-naming.in	2020-11-26 23:51:46.000000000 +0900
++++ b/utils/rtm-naming/rtm-naming.in	2020-11-26 23:55:19.000000000 +0900
+@@ -1,21 +1,18 @@
  #
+ #  @file rtm-naming
+ #  @brief OpenRTM-aist name server launcher
+-#  @date $Date: 2005-05-12 09:06:19 $
+ #  @author Noriaki Ando <n-ando@aist.go.jp>
+ #
+-#  Copyright (C) 2003-2018
+-#      Intelligent Systems Research Institute,
++#  Copyright (C) 2003-2020
+ #      National Institute of
+ #          Advanced Industrial Science and Technology (AIST), Japan
+ #      All rights reserved.
+ #
+-#  $Id$
+-#
  
 -pname=`basename $cosnames`
 -hostname=`hostname`
 -currdir=`pwd`
--DEBUG=""
 +PNAME=`basename $COSNAMES`
 +HOSTNAME=`hostname`
 +OSNAME=`uname -s`
 +LOGDIR="/tmp"
-+DEBUG="YES"
+ DEBUG=""
  
  usage()
- {
-@@ -41,6 +42,7 @@ EOF
+@@ -41,6 +38,7 @@
  
  get_opt()
  {
@@ -44,7 +53,7 @@ index d9c586a8..794c8350 100644
      # Global variables
      FORCEKILL=""
      PASSWORD=""
-@@ -65,6 +67,11 @@ get_opt()
+@@ -65,6 +63,11 @@
                  ;;
          esac
      done
@@ -56,7 +65,7 @@ index d9c586a8..794c8350 100644
  }
  #
  # debug <text>
-@@ -76,7 +83,7 @@ get_opt()
+@@ -76,7 +79,7 @@
  debug()
  {
      if test "x$DEBUG" != "x"; then
@@ -65,7 +74,7 @@ index d9c586a8..794c8350 100644
      fi
  }
  
-@@ -89,9 +96,15 @@ debug()
+@@ -89,9 +92,15 @@
  # @return 0 process that is using the port was found
  #         1 process not found
  #
@@ -81,7 +90,7 @@ index d9c586a8..794c8350 100644
      _port=$1
      debug "netstat -tlnp 2> /dev/null | grep $_port | awk '{print $7;}'"
      netstat_tanp=`netstat -tlnp`
-@@ -113,7 +126,43 @@ get_pid_of_nsport()
+@@ -113,7 +122,43 @@
      debug "$_port port is used by $pname_of_nsport (pid = $_pid)."
      return 0
  }
@@ -125,7 +134,7 @@ index d9c586a8..794c8350 100644
  
  #
  # is_launch_from_init <prog_name> (<pid>)
-@@ -148,8 +197,8 @@ is_started_from_init()
+@@ -148,8 +193,8 @@
  	if test $_pid -eq $_var_run_pid; then
  	    debug "The process $_pname ($_pid) might be started " \
  		"from init script."
@@ -136,7 +145,7 @@ index d9c586a8..794c8350 100644
  
  	    if test "x$init_script" = "x"; then
  
-@@ -176,8 +225,9 @@ is_started_from_init()
+@@ -176,8 +221,9 @@
  #
  check_cosname()
  {
@@ -148,7 +157,7 @@ index d9c586a8..794c8350 100644
  	echo "Please install or chech rtm-naming script."
  	exit 1
      fi
-@@ -185,16 +235,31 @@ check_cosname()
+@@ -185,16 +231,31 @@
  
  delete_omninames_files()
  {
@@ -187,7 +196,7 @@ index d9c586a8..794c8350 100644
  }
  
  #
-@@ -204,12 +269,17 @@ delete_omninames_files()
+@@ -204,12 +265,17 @@
  #
  specified_port_used_check()
  {
@@ -207,7 +216,7 @@ index d9c586a8..794c8350 100644
          matchflag=0
          for p in $pids; do
              if test "x$pid_of_nsport" = "x$p"; then
-@@ -217,8 +287,8 @@ specified_port_used_check()
+@@ -217,8 +283,8 @@
              fi
          done
          if test $matchflag -eq 0; then
@@ -218,7 +227,7 @@ index d9c586a8..794c8350 100644
              exit 1
          fi
      else
-@@ -235,6 +305,7 @@ specified_port_used_check()
+@@ -235,6 +301,7 @@
  #
  stop_omninames_by_init_script()
  {
@@ -226,7 +235,7 @@ index d9c586a8..794c8350 100644
      echo "omniNames might be started $init_script."
  
      if test "x$FORCEKILL" = "x" && test "x$STOPNAMESERVICE" = "x" ; then
-@@ -248,13 +319,13 @@ stop_omninames_by_init_script()
+@@ -248,13 +315,13 @@
      echo "Stopping omniNames by $init_script."
      if test "x$PASSWORD" = "x" ; then
         sudo $init_script stop
@@ -243,7 +252,7 @@ index d9c586a8..794c8350 100644
      delete_omninames_files
      return 0
  
-@@ -278,7 +349,8 @@ stop_omninames_by_init_script()
+@@ -278,7 +345,8 @@
  #
  stop_existing_ns()
  {
@@ -253,7 +262,7 @@ index d9c586a8..794c8350 100644
  
      # Find a process which is using specified port.
      specified_port_used_check
-@@ -288,14 +360,14 @@ stop_existing_ns()
+@@ -288,14 +356,14 @@
  
      # omniNames is not started by init script
      if test $? -ne 0; then
@@ -271,7 +280,7 @@ index d9c586a8..794c8350 100644
  	            else
                      read -p "Kill anyway? (y/N)" killns
  		        fi
-@@ -305,16 +377,18 @@ stop_existing_ns()
+@@ -305,16 +373,18 @@
                  fi
  	        fi
              if test "x$PASSWORD" = "x" ; then
@@ -293,7 +302,7 @@ index d9c586a8..794c8350 100644
          echo "cannot be estimated. Arboting"
          exit 1
      fi
-@@ -334,34 +408,54 @@ stop_existing_ns()
+@@ -334,34 +404,54 @@
  #
  start_omninames()
  {
@@ -360,7 +369,7 @@ index d9c586a8..794c8350 100644
      fi
  
      # Stopping existing name service
-@@ -369,8 +463,8 @@ omniname()
+@@ -369,8 +459,8 @@
  
      # Try to start omniNames again
      if test "x$STOPNAMESERVICE" = "x" ; then
@@ -371,7 +380,7 @@ index d9c586a8..794c8350 100644
      fi
  }
  
-@@ -385,12 +479,13 @@ omniname()
+@@ -385,12 +475,13 @@
  #
  start_taonames()
  {
@@ -388,7 +397,7 @@ index d9c586a8..794c8350 100644
      ret=$!
      sleep 1
      debug "return code of TAO Naming_Service:" $ret
-@@ -405,6 +500,7 @@ start_taonames()
+@@ -405,6 +496,7 @@
  
  taonames()
  {
@@ -396,7 +405,7 @@ index d9c586a8..794c8350 100644
      # Check cosname variable is properly set
      check_cosname
  
-@@ -427,7 +523,7 @@ taonames()
+@@ -427,7 +519,7 @@
  #------------------------------------------------------------
  get_opt $@
  
@@ -405,3 +414,8 @@ index d9c586a8..794c8350 100644
  	omniORB)
  		omniname
  		;;
+@@ -438,4 +530,3 @@
+ 		usage
+ 		;;
+ esac
+-

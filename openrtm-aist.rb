@@ -23,7 +23,7 @@ class OpenrtmAist < Formula
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
-    sha256 "ba0767c0471cab09edee623323620f02a37dfe27d6a28b01b2a5e6884cf05bce"
+    sha256 "a41cbb5d166728ac666860e6354f7269b92c04b58c4235141080b2020be3aaca"
   end
 
   def install
@@ -38,7 +38,7 @@ class OpenrtmAist < Formula
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
-    system "make"
+    system "make", "-j", "4"
     system "make", "install"
   end
 
