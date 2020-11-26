@@ -15,11 +15,12 @@ class OpenrtmAistPy39 < Formula
   depends_on "boost"
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
+    root_url "https://homebrew.bintray.com/bottles-openrtm"
     cellar :any
-    sha256 "eb9f1bba9b4c929e377a30f2e4359df33b628d078e550769e481c135d6748f48" => :catalina
+    rebuild 1
+    sha256 "f973ee952d7a8d78ec6cd99e7a237b1d729236afd3c4afc5061df4c7b1201559" => :catalina
   end
-  
+
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
     sha256 "a41cbb5d166728ac666860e6354f7269b92c04b58c4235141080b2020be3aaca"

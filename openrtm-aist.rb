@@ -15,12 +15,6 @@ class OpenrtmAist < Formula
   depends_on "boost"
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
-    cellar :any
-    rebuild 1
-    sha256 "6dc9945f6066e792f29b72cb97e74e3a5d2f5fa895cd938eb3cdf93b5db96866" => :catalina
-  end
-  bottle do
     root_url "https://homebrew.bintray.com/bottles-openrtm"
     cellar :any
     rebuild 2
@@ -44,7 +38,7 @@ class OpenrtmAist < Formula
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
-    system "make", "-j", "4"
+    system "make", "-j", "8"
     system "make", "install"
   end
 
