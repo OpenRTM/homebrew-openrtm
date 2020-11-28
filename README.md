@@ -7,7 +7,9 @@ Currently the following versions of OpenRTM-aist are provided.
 
 - OpenRTM-aist-1.2.2
   - C++ version
+    - on Python 3.8, 3.9 (omniidl depeneds on python)
   - Python version
+    - on Python 3.8, 3.9
   - Java version
   - OpenRTP-aist (RTCBuildler, RTSystemEditor on Eclipse)
 
@@ -26,6 +28,8 @@ Please install the omniORB bottle "[omniorb-ssl](https://github.com/OpenRTM/home
 $ brew update
 $ brew uninstall omniorb  <--- if you already installed omniorb
 $ brew install openrtm/openrtm/openrtm-aist
+or
+$ brew install openrtm/openrtm/openrtm-aist-py38 (if you still use Python 3.8)
 $ brew link openrtm-aist
 and then please try to run sample components 
 $ /usr/local/share/openrtm-1.2/components/c++/examples/ConsoleInComp
@@ -36,6 +40,8 @@ Please install the omniORBpy bottle "[omniorbpy](https://github.com/OpenRTM/home
 ```shell
 $ brew update
 $ brew install openrtm/openrtm/openrtm-aist-python
+or
+$ brew install openrtm/openrtm/openrtm-aist-python-py38 (if you still use Python 3.8)
 $ brew link openrtm-aist-python
 and then please try to run sample components
 $ python3 /usr/local/share/openrtm-1.2/components/python3/SimpleIO/ConsoleIn.py 
