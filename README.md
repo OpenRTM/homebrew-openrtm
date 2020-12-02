@@ -11,7 +11,9 @@ Currently the following versions of OpenRTM-aist are provided.
   - Python version
     - on Python 3.8, 3.9
   - Java version
+    - needs Java8 (adoptopenjdk8) because of CORBA
   - OpenRTP-aist (RTCBuildler, RTSystemEditor on Eclipse)
+    - needs Java8 (adoptopenjdk8) because of CORBA
 
 These packages supports the following macOS versions
 
