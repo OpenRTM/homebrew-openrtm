@@ -4,7 +4,7 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-openrtm
 #============================================================
-require 'fileutils'
+require "fileutils"
 
 class OpenrtmAistJava < Formula
   desc "OpenRTM-aist: RT-Middleware and OMG RTC implementation in C++ implemented by AIST"
@@ -16,8 +16,7 @@ class OpenrtmAistJava < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
-    cellar :any_skip_relocation
-    sha256 "4477710635162c2f0859c138b8bac6a473c6fad832968ed6305af79b053cac05" => :catalina
+    sha256 cellar: :any_skip_relocation, catalina: "4477710635162c2f0859c138b8bac6a473c6fad832968ed6305af79b053cac05"
   end
 
   def install
@@ -36,11 +35,11 @@ class OpenrtmAistJava < Formula
       system "mkdir", "-p", "#{prefix}/lib/openrtm-#{short_ver}"
       system "cp", "-R", "jar", "#{prefix}/lib/openrtm-#{short_ver}"
 
-      # installing profile.d script into etc 
+      # installing profile.d script into etc
       system "mkdir", "-p", "#{prefix}/etc/profile.d"
-      File.open("#{prefix}/etc/profile.d/openrtm-aist-java.sh", mode = "w"){|f|
+      File.open("#{prefix}/etc/profile.d/openrtm-aist-java.sh", mode = "w") do |f|
         f.write("export RTM_JAVA_ROOT=#{prefix}/lib/openrtm-#{short_ver}")
-      }
+      end
       system "chmod", "755", "#{prefix}/etc/profile.d/openrtm-aist-java.sh"
 
       # installing executable into bin
@@ -56,7 +55,7 @@ class OpenrtmAistJava < Formula
       Dir.chdir("examples") do
         FileUtils.cp_r("RTMExamples",
                        "#{prefix}/share/openrtm-#{short_ver}/components/java/")
-        Dir.glob('*.sh').each do |fname|
+        Dir.glob("*.sh").each do |fname|
           FileUtils.cp(fname,
             "#{prefix}/share/openrtm-#{short_ver}/components/java/" + fname)
           system "chmod", "755",
