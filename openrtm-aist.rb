@@ -11,15 +11,15 @@ class OpenrtmAist < Formula
   sha256 "4e25b0e38d9b6690b94e1163285ea8b49aef6b245a2c454586915d425e5830a0"
   license "LGPL-2.1"
 
-  depends_on "openrtm/omniorb/omniorb-ssl"
-  depends_on "boost"
-
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2"
-    cellar :any
     rebuild 2
-    sha256 "040affa6c93010bcdfa7308936bd0be7dea0fcac5074fa350d23c6a16199be40" => :catalina
+    sha256 cellar: :any, catalina: "040affa6c93010bcdfa7308936bd0be7dea0fcac5074fa350d23c6a16199be40"
   end
+
+  depends_on "boost"
+
+  depends_on "openrtm/omniorb/omniorb-ssl"
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
@@ -27,7 +27,7 @@ class OpenrtmAist < Formula
   end
 
   def install
-    args = %W[
+    args = %w[
       OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
       OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
       CC=gcc-4.9
@@ -43,6 +43,6 @@ class OpenrtmAist < Formula
   end
 
   test do
-    system "rtm-config --help"
+    system "rtm-config", "--help"
   end
 end
