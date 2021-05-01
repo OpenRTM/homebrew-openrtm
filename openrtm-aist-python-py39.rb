@@ -11,13 +11,12 @@ class OpenrtmAistPythonPy39 < Formula
   sha256 "88366dd5d9fefa19ba25cbf42b6d39170ffb65a1fe4c8f48222a13ddbcecfae8"
   license "LGPL-2.1"
 
-  depends_on "omniorbpy"
-  
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
-    cellar :any_skip_relocation
-    sha256 "ba1e1cc7b6f9f9c8dd9dcf3907aec6127cc4333c92d363e30066434b59c790b2" => :catalina
+    sha256 cellar: :any_skip_relocation, catalina: "ba1e1cc7b6f9f9c8dd9dcf3907aec6127cc4333c92d363e30066434b59c790b2"
   end
+
+  depends_on "omniorbpy"
 
   def install
     system "/usr/local/bin/python3", "setup.py", "build"
@@ -25,6 +24,6 @@ class OpenrtmAistPythonPy39 < Formula
   end
 
   test do
-    system "rtcprof_python3 --help"
+    system "rtcprof_python3", "--help"
   end
 end

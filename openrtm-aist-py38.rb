@@ -16,15 +16,11 @@ class OpenrtmAistPy38 < Formula
   sha256 "4e25b0e38d9b6690b94e1163285ea8b49aef6b245a2c454586915d425e5830a0"
   license "LGPL-2.1"
 
-  depends_on "openrtm/omniorb/omniorb-ssl-py38"
-  depends_on "boost"
-
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
-    cellar :any
-    sha256 "1bf6d956dd58787a282201e841428041e8467ac2fdc4cf1fdced72a57523dc74" => :catalina
+    sha256 cellar: :any, catalina: "1bf6d956dd58787a282201e841428041e8467ac2fdc4cf1fdced72a57523dc74"
   end
-  
+
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2"
     cellar :any
@@ -32,6 +28,9 @@ class OpenrtmAistPy38 < Formula
     sha256 "7e751f843aa18db7edcab1574e1379fa6b88332294763842c42a2d0303b9dba7" => :catalina
   end
 
+  depends_on "boost"
+
+  depends_on "openrtm/omniorb/omniorb-ssl-py38"
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
@@ -39,7 +38,7 @@ class OpenrtmAistPy38 < Formula
   end
 
   def install
-    args = %W[
+    args = %w[
       OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
       OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
       CFLAGS=-I/usr/local/opt/python@3.8/include
@@ -57,6 +56,6 @@ class OpenrtmAistPy38 < Formula
   end
 
   test do
-    system "rtm-config --help"
+    system "rtm-config", "--help"
   end
 end
