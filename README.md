@@ -67,11 +67,13 @@ Due to the OpenRTP dependency, the Cask of adoptopenjdk8 will be installed autom
 ```shell
 $ brew update
 $ brew tap openrtm/openrtm
-$ brew cask install openrtp
+$ brew install openrtp
 $ open -a OpenRTP
 ```
 or launch OpenRTP from "Applications".
 
+note: cask command was obsolete.
+ 
 When opening OpenRTP, the following dialog window might appear.
 In that case, please click the "Open" button.
 
