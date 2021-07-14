@@ -13,9 +13,6 @@ class OpenrtmAist < Formula
 
   depends_on "openrtm-aist-py39"
 
-  def install
-  end
-
   test do
     system "rtm-config", "--help"
   end
