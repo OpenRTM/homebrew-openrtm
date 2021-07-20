@@ -16,8 +16,7 @@ class OpenrtmAist < Formula
   depends_on "openrtm-aist-py39"
 
   def install
-    require unindent
-    ("/dev/null").write <<-EOS.unindent
+    ("/dev/null").write <<-EOS
         #!/bin/sh
         echo Hello
     EOS
