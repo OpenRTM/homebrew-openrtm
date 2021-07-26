@@ -18,8 +18,7 @@ class OpenrtmAist < Formula
   end
 
   depends_on "boost"
-
-  depends_on "openrtm/omniorb/omniorb-ssl-py39"
+  depends_on "openrtm/omniorb/omniorb-ssl"
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"
