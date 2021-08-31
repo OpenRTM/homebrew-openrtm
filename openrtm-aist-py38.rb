@@ -18,14 +18,8 @@ class OpenrtmAistPy38 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
-    sha256 cellar: :any, catalina: "1bf6d956dd58787a282201e841428041e8467ac2fdc4cf1fdced72a57523dc74"
-  end
-
-  bottle do
-    root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2"
-    cellar :any
     rebuild 1
-    sha256 "7e751f843aa18db7edcab1574e1379fa6b88332294763842c42a2d0303b9dba7" => :catalina
+    sha256 celler: :any, catalina: "7e751f843aa18db7edcab1574e1379fa6b88332294763842c42a2d0303b9dba7"
   end
 
   depends_on "boost"
