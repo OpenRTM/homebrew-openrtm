@@ -4,9 +4,9 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-openrtm
 #
-# This is the formula for omniORBpy on python3.8 (not 3.9).
-# To use this formula/bottle, switch python 3.9 to python 3.8.
-# $ brew unlink python3 (unlink python 3.9)
+# This is the formula for OpenRTM-aist (C++) for python3.8.
+# To use this formula/bottle, switch python into python 3.8.
+# $ brew unlink python3 (unlink python 3.X != 3.8)
 # $ brew link python@3.8
 #============================================================
 class OpenrtmAistPy38 < Formula

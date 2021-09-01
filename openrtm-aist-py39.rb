@@ -3,6 +3,11 @@
 #
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-openrtm
+#
+# This is the formula for OpenRTM-aist (C++) for python3.9.
+# To use this formula/bottle, switch python into python 3.9.
+# $ brew unlink python3 (unlink python 3.X != 3.9)
+# $ brew link python@3.9
 #============================================================
 class OpenrtmAistPy39 < Formula
   desc "OpenRTM-aist: RT-Middleware and OMG RTC implementation in C++ implemented by AIST"
