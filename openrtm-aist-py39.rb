@@ -6,7 +6,7 @@
 #
 # This is the formula for OpenRTM-aist (C++) for python3.9.
 # To use this formula/bottle, switch python into python 3.9.
-# $ brew unlink python3 (unlink python 3.X != 3.9)
+# $ brew unlink python3 (unlink python 3.X)
 # $ brew link python@3.9
 #============================================================
 class OpenrtmAistPy39 < Formula
