@@ -16,11 +16,11 @@ class OpenrtmAistPythonPy39 < Formula
     sha256 cellar: :any_skip_relocation, catalina: "ba1e1cc7b6f9f9c8dd9dcf3907aec6127cc4333c92d363e30066434b59c790b2"
   end
 
-  depends_on "omniorbpy"
+  depends_on "openrtm/omniorb/omniorbpy-py38"
 
   def install
-    system "/usr/local/bin/python3", "setup.py", "build"
-    system "/usr/local/bin/python3", "setup.py", "install", "--prefix=#{prefix}"
+    system "/usr/local/opt/python@3.9/bin/python3.9", "setup.py", "build"
+    system "/usr/local/bin/python@3.9/bin/python3.9", "setup.py", "install", "--prefix=#{prefix}"
   end
 
   test do
