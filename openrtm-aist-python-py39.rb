@@ -21,6 +21,7 @@ class OpenrtmAistPythonPy39 < Formula
   def install
     system "/usr/local/opt/python@3.9/bin/python3.9", "setup.py", "build"
     system "/usr/local/bin/python@3.9/bin/python3.9", "setup.py", "install", "--prefix=#{prefix}"
+    FileUtils.chmod_R(0755, comp_dir.to_s)
   end
 
   test do
