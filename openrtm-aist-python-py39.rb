@@ -13,10 +13,11 @@ class OpenrtmAistPythonPy39 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
-    sha256 cellar: :any_skip_relocation, catalina: "ba1e1cc7b6f9f9c8dd9dcf3907aec6127cc4333c92d363e30066434b59c790b2"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, catalina: "e6e94bfd150d56f3b33ecb8bf7cf5a47c4eb8fc8c52dbabcf3f9f4ff64cfbe5d"
   end
 
-  depends_on "openrtm/omniorb/omniorbpy-py38"
+  depends_on "openrtm/omniorb/omniorbpy-py39"
 
   def install
     comp_dir = "#{prefix}/share/openrtm-1.2/components/python3/"
