@@ -4,12 +4,12 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-openrtm
 #
-# This is the formula for OpenRTM-aist (C++) for python3.9.
-# To use this formula/bottle, switch python into python 3.9.
-# $ brew unlink python3 (unlink python 3.X != 3.9)
-# $ brew link python@3.9
+# This is the formula for OpenRTM-aist (C++) for python3.10.
+# To use this formula/bottle, switch python into python 3.10.
+# $ brew unlink python3 (unlink python 3.X)
+# $ brew link python@3.10
 #============================================================
-class OpenrtmAist < Formula
+class OpenrtmAistPy310 < Formula
   desc "OpenRTM-aist: RT-Middleware and OMG RTC implementation in C++ implemented by AIST"
   homepage "https://openrtm.org"
   url "https://github.com/OpenRTM/OpenRTM-aist/releases/download/v1.2.2/OpenRTM-aist-1.2.2.tar.gz"
@@ -18,12 +18,11 @@ class OpenrtmAist < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2"
-    rebuild 3
-    sha256 cellar: :any, catalina: "ddcb03986ec249dbefec78ef4959f599ce73a6f773c710620f95c3bdf001fe3c"
+    sha256 cellar: :any, catalina: "5271c7254783fd027bcfc25e6ebfb970481caa0b30a9b9eabda6e4d39898b905"
   end
 
   depends_on "boost"
-  depends_on "openrtm/omniorb/omniorb-ssl"
+  depends_on "openrtm/omniorb/omniorb-ssl-py310"
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-openrtm/master/Patches/rtm-naming.diff"

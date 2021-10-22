@@ -18,12 +18,11 @@ class OpenrtmAistPy38 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-openrtm/releases/download/1.2.2/"
-    rebuild 1
-    sha256 celler: :any, catalina: "7e751f843aa18db7edcab1574e1379fa6b88332294763842c42a2d0303b9dba7"
+    rebuild 2
+    sha256 cellar: :any, catalina: "f1d60d10facdd9218c452fbff5373fba4cd935bec2c7d1e29fc1761fc9876d8e"
   end
 
   depends_on "boost"
-
   depends_on "openrtm/omniorb/omniorb-ssl-py38"
 
   patch do
@@ -32,14 +31,6 @@ class OpenrtmAistPy38 < Formula
   end
 
   def install
-    args = %w[
-      OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
-      OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
-      CFLAGS=-I/usr/local/opt/python@3.8/include
-      LDFLAGS=-L/usr/local/opt/python@3.8/lib
-      CC=gcc-4.9
-      CXX=g++-4.9
-    ]
     system "./configure", "--without-doxygen",
                           "--disable-debug",
                           "--disable-dependency-tracking",
