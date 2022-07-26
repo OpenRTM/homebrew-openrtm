@@ -13,7 +13,7 @@ cask "openrtp" do
   desc "Open RT Platform tool chain"
   homepage "https://openrtm.org/"
 
-  depends_on cask: "homebrew/cask-versions/adoptopenjdk8"
+  depends_on cask: "adoptopenjdk8"
 
   app "OpenRTP.app"
 
